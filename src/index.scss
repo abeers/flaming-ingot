@@ -1,1 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
+$flamingot-pink: #d20885;
+$flamingot-orange: #eb7c07;
+$flamingot-green: #aef925;
+$flamingot-blue: #1da5e2;
+
+.main-navbar {
+  background: $flamingot-pink;
+}
