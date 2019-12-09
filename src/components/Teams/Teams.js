@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
 import { fetchAllTeams } from '../../api/teams'
@@ -39,7 +39,9 @@ const Teams = ({ user }) => {
       {
         teams
           ? teams.map(team => (
-            <div key={team.id}>{team.name}</div>
+            <p key={team.id}>
+              <Link to={`/teams/${team.id}`}>{team.name}</Link>
+            </p>
           ))
           : 'No teams to display'
       }

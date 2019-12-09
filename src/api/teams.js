@@ -8,6 +8,13 @@ export const fetchAllTeams = () => {
   })
 }
 
+export const fetchOneTeam = (id) => {
+  return axios({
+    method: 'GET',
+    url: `${apiUrl}/teams/${id}`
+  })
+}
+
 export const createTeam = (team, user) => {
   return axios({
     method: 'POST',
@@ -16,5 +23,15 @@ export const createTeam = (team, user) => {
       'Authorization': `Bearer ${user.token}`
     },
     data: { team }
+  })
+}
+
+export const deleteTeam = (id, user) => {
+  return axios({
+    method: 'DELETE',
+    url: `${apiUrl}/teams/${id}`,
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    }
   })
 }
