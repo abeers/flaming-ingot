@@ -8,7 +8,7 @@ import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
-import Teams from '../Teams/Teams.js'
+import Teams from '../Teams/Teams'
 
 class App extends Component {
   constructor () {
@@ -56,7 +56,7 @@ class App extends Component {
             <ChangePassword alert={this.alert} user={user} />
           )} />
           <Route path='/teams' render={() => (
-            <Teams />
+            <Teams user={user} />
           )} />
         </main>
       </Fragment>
