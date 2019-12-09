@@ -26,6 +26,17 @@ export const createTeam = (team, user) => {
   })
 }
 
+export const updateTeam = (team, user) => {
+  return axios({
+    method: 'PATCH',
+    url: `${apiUrl}/teams/${team.id}`,
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    },
+    data: { team }
+  })
+}
+
 export const deleteTeam = (id, user) => {
   return axios({
     method: 'DELETE',
