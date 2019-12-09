@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal'
 import { createTeam } from '../../api/teams'
 import TeamForm from './TeamForm'
 
-const TeamCreate = ({ user, setTeamCreated, setShowCreateModal }) => {
+const TeamCreate = ({ user, setCreated, setShowCreateModal }) => {
   const [team, setTeam] = useState({ name: '' })
   const [createdTeamId, setCreatedTeamId] = useState(null)
 
@@ -20,7 +20,7 @@ const TeamCreate = ({ user, setTeamCreated, setShowCreateModal }) => {
     createTeam(team, user)
       .then(res => {
         setCreatedTeamId(res.data.team.id)
-        setTeamCreated(true)
+        setCreated(true)
       })
       .catch(console.error)
 

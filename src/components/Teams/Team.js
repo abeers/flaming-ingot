@@ -3,22 +3,22 @@ import { Link, Redirect } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
 import { fetchOneTeam, deleteTeam } from '../../api/teams'
-import TeamEdit from '../Teams/TeamEdit'
+import TeamUpdate from '../Teams/TeamUpdate'
 
-const Team = (props) => {
+const Team = ({ match, user }) => {
   const [team, setTeam] = useState(null)
   const [deleted, setDeleted] = useState(false)
   const [updated, setUpdated] = useState(false)
-  const [showEditModal, setShowEditModal] = useState(false)
+  const [showUpdateModal, setShowUpdateModal] = useState(false)
 
   useEffect(() => {
-    fetchOneTeam(props.match.params.id)
+    fetchOneTeam(match.params.id)
       .then(res => setTeam(res.data.team))
       .catch(console.error)
-  }, [props.match.params.id, deleted, updated])
+  }, [match.params.id, deleted, updated])
 
   const destroy = () => {
-    deleteTeam(props.match.params.id, props.user)
+    deleteTeam(match.params.id, user)
       .then(() => setDeleted(true))
       .catch(console.error)
   }
@@ -37,19 +37,19 @@ const Team = (props) => {
     <Fragment>
       <h4>{team.name}</h4>
       <p>Sigilyph</p>
-      {props.user && props.user.id === team.user.id && (
+      {user && user.id === team.user.id && (
         <Fragment>
-          <Button onClick={() => setShowEditModal(true)}>Edit Team</Button>
-          <Button onClick={destroy}>Delete Team</Button>
+          <Button onClick={() => setShowUpdateModal(true)}>Update Team</Button>
+          <Button variant="secondary" onClick={destroy}>Delete Team</Button>
         </Fragment>
       )}
       <Link to="/teams">Back to all teams</Link>
-      {showEditModal && (
-        <TeamEdit
-          user={props.user}
+      {showUpdateModal && (
+        <TeamUpdate
+          user={user}
           existingTeam={team}
-          setTeamUpdated={setUpdated}
-          setShowEditModal={setShowEditModal}
+          setUpdated={setUpdated}
+          setShowUpdateModal={setShowUpdateModal}
         />
       )}
     </Fragment>

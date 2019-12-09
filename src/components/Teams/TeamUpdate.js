@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal'
 import { updateTeam } from '../../api/teams'
 import TeamForm from './TeamForm'
 
-const TeamEdit = ({ user, existingTeam, setTeamUpdated, setShowEditModal }) => {
+const TeamUpdate = ({ user, existingTeam, setUpdated, setShowUpdateModal }) => {
   const [team, setTeam] = useState(existingTeam)
 
   const handleChange = event => {
@@ -17,11 +17,11 @@ const TeamEdit = ({ user, existingTeam, setTeamUpdated, setShowEditModal }) => {
 
     updateTeam(team, user)
       .then(res => {
-        setTeamUpdated(true)
+        setUpdated(true)
       })
       .catch(console.error)
 
-    setShowEditModal(false)
+    setShowUpdateModal(false)
   }
 
   return (
@@ -30,10 +30,10 @@ const TeamEdit = ({ user, existingTeam, setTeamUpdated, setShowEditModal }) => {
         team={team}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        handleCancel={() => setShowEditModal(false)}
+        handleCancel={() => setShowUpdateModal(false)}
       />
     </Modal>
   )
 }
 
-export default TeamEdit
+export default TeamUpdate

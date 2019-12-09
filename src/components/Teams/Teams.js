@@ -1,22 +1,21 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
 import { fetchAllTeams } from '../../api/teams'
 import TeamCreate from '../Teams/TeamCreate'
+import TeamCard from '../Teams/TeamCard'
 
 const Teams = ({ user }) => {
   const [teams, setTeams] = useState([])
   const [showCreateModal, setShowCreateModal] = useState(false)
-  const [teamCreated, setTeamCreated] = useState(false)
+  const [created, setCreated] = useState(false)
 
   useEffect(() => {
     fetchAllTeams()
-      .then((res) => {
-        setTeams(res.data.teams)
-      })
+      .then(res => setTeams(res.data.teams))
       .catch(console.error)
-  }, [teamCreated])
+  }, [created])
 
   const handleClick = () => {
     setShowCreateModal(true)
@@ -25,26 +24,26 @@ const Teams = ({ user }) => {
   return (
     <Fragment>
       {user && (
-        <Fragment>
-          <Button onClick={handleClick}>Create Team</Button>
-          {showCreateModal && (
-            <TeamCreate
-              user={user}
-              setTeamCreated={setTeamCreated}
-              setShowCreateModal={setShowCreateModal}
-            />
-          )}
-        </Fragment>
+        <Button onClick={handleClick}>Create Team</Button>
       )}
       {
         teams
           ? teams.map(team => (
-            <p key={team.id}>
-              <Link to={`/teams/${team.id}`}>{team.name}</Link>
-            </p>
+            <TeamCard
+              key={team.id}
+              team={team}
+              user={user}
+            />
           ))
           : 'No teams to display'
       }
+      {showCreateModal && (
+        <TeamCreate
+          user={user}
+          setCreated={setCreated}
+          setShowCreateModal={setShowCreateModal}
+        />
+      )}
     </Fragment>
   )
 }

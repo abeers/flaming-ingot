@@ -4,7 +4,7 @@ import axios from 'axios'
 export const fetchAllTeams = () => {
   return axios({
     method: 'GET',
-    url: apiUrl + '/teams'
+    url: `${apiUrl}/teams`
   })
 }
 
@@ -18,7 +18,7 @@ export const fetchOneTeam = (id) => {
 export const createTeam = (team, user) => {
   return axios({
     method: 'POST',
-    url: apiUrl + '/teams',
+    url: `${apiUrl}/teams`,
     headers: {
       'Authorization': `Bearer ${user.token}`
     },
